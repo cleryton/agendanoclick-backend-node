@@ -1,0 +1,22 @@
+{
+  "name": "agendanoclick",
+  "version": "1.0.0",
+  "description": "API REST para agendamento de serviços",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/047stanczak/agendanoclick-backend-node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/047stanczak/agendanoclick-backend-node/issues"
+  },
+  "homepage": "https://github.com/047stanczak/agendanoclick-backend-node#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
