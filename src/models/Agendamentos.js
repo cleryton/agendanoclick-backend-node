@@ -1,48 +1,47 @@
 const { Model, DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  class Login extends Model {
+  class Agendamento extends Model {
     static associate(models) {
-      this.hasOne(models.Usuario, {
-        foreignKey: "login_id",
+      this.belongsTo(models.Profissional, {
+        foreignKey: "profissional_id",
+        as: "profissional",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+      this.belongsTo(models.Usuario, {
+        foreignKey: "usuario_id",
         as: "usuario",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
     }
   }
-  Login.init(
+
+  Agendamento.init(
     {
       id: {
         type: DataTypes.BIGINT,
         primaryKey: true,
         autoIncrement: true,
       },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      senha: {
+      status: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      role: {
-        type: DataTypes.ENUM("USUARIO", "PROFISSIONAL", "ADMINISTRADOR"),
-        defaultValue: "USUARIO",
-      },
+      servico: DataTypes.STRING,
+      notas: DataTypes.TEXT,
       criado_em: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-      ultimo_login: DataTypes.DATE,
     },
     {
       sequelize,
-      modelName: "Login",
-      tableName: "logins",
+      modelName: "Agendamento",
+      tableName: "agendamentos",
       timestamps: false,
     }
   );
-  return Login;
+  return Agendamento;
 };

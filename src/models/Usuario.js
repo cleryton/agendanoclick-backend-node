@@ -3,14 +3,13 @@ const { Model, DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   class Usuario extends Model {
     static associate(models) {
-      Usuario.hasOne(models.Login, {
+      this.belongsTo(models.Login, {
         foreignKey: "login_id",
         as: "login",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
-
-      Usuario.hasMany(models.Schedules, {
+      this.hasMany(models.Agendamentos, {
         foreignKey: "usuario_id",
         as: "agendamentos",
         onDelete: "CASCADE",
@@ -26,9 +25,15 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      nome: DataTypes.STRING,
+      nome: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       telefone: DataTypes.STRING,
-      cpf: DataTypes.STRING,
+      cpf: {
+        type: DataTypes.STRING,
+        unique: true,
+      },
       data_nascimento: DataTypes.DATEONLY,
     },
     {
@@ -38,6 +43,5 @@ module.exports = (sequelize) => {
       timestamps: false,
     }
   );
-
   return Usuario;
 };
