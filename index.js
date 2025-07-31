@@ -5,13 +5,14 @@ const app = express();
 app.use(express.json());
 
 const authRoutes = require("./src/routes/authRoutes");
+const registerRoutes = require("./src/routes/registerRoutes");
 
-app.use("/auth", authRoutes);
+app.use("", authRoutes);
+app.use("/register", registerRoutes);
 
 models.sequelize
   .authenticate()
   .then(() => models.sequelize.sync())
-  .then(() => console.log("BD conectado e sincronizado"))
   .catch((err) => console.error("Erro BD", err));
 
 const PORT = process.env.PORT || 3000;
